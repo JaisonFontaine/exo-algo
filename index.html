@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<title>Exercices algo - 0822</title>
+		<meta charset="utf-8">
+		
+		<style type="text/css">
+			/* initialiser les marges de toutes les balises à 0 */
+			* {
+				margin: 0;
+				padding: 0;
+
+				/* limite la taille du bloc à la taille de son conteneur parent
+				   le padding et la bordure n'augmentent plus sa largeur */
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				-o-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: auto;
+			}
+
+			body {
+				font-size: 100%;
+			}
+
+			h1 {
+				font-family: sans-serif;
+				color: #fff;
+				font-size: 3em;
+				text-align: center;
+			}
+			
+			h2 {
+				font-family: sans-serif;
+				font-size: 3em;
+				margin-bottom: 10px;
+			}
+			
+			h3 {
+				font-family: sans-serif;
+				font-size: 2em;
+				margin-bottom: 10px;
+			}
+			
+			p {
+				margin-bottom: 10px;
+			}
+			
+			input {
+				margin-bottom: 10px;
+			}
+			
+			hr {
+				margin: 2.5em;
+			}
+			
+			header {
+				width: 100%;
+				height: 100px;
+				background-color: rgb(51, 51, 51);
+				padding: 1em;
+			}
+			
+			.wrapper {
+				padding: 2em;
+			}
+			
+			.inner-wrap {
+				padding: 30px;
+				background: rgba(248, 248, 248, 0.7);
+				border-radius: 6px;
+				margin-bottom: 15px;
+			}
+		</style>
+		
+		<!-- appeler le script jquery -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				function calcNPremierEntier(nb){
+					var cpt = 0;
+					
+					for(var i = 0 ; i <= nb ; i++){
+						cpt = cpt + i;
+					}
+					
+					$('#calcEntier .result p').html(cpt);
+				}
+				
+				$('#calcEntier .bouton').click(function(){
+					var nb = $('#calcEntier .number').val();
+					calcNPremierEntier(nb);
+				});
+			});
+		</script>
+	</head>
+	
+	<body>
+		<header>
+			<h1>Exercices algo</h1>
+		</header>
+		
+		<div class="wrapper">
+			<div id="calcEntier">
+				<h2>Nombre entier</h2>	
+				<p>Choisisser un nombre entier</p>	
+				<input class="number" type="number" min="0">
+				<br/>
+				<input class="bouton" type="submit">
+				<h3>Résultat</h3>
+				<div class="inner-wrap result"><p>&nbsp;</p></div>
+			</div>
+			
+			<hr>
+			
+			<div id="palindrome">
+				<h2>Palindrome (pas encore fait)</h2>	
+				<p>Entrer un mot</p>	
+				<input class="mot" type="text">
+				<br/>
+				<input class="bouton" type="submit">
+				<h3>Résultat</h3>
+				<div class="inner-wrap result"><p>&nbsp;</p></div>
+			</div>
+		</div>
+	</body>
+</html>
