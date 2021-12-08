@@ -83,19 +83,88 @@
 		
 		<script type="text/javascript">
 			$(document).ready(function(){
+				/* Nombre entier */
 				function calcNPremierEntier(nb){
-					var cpt = 0;
-					
-					for(var i = 0 ; i <= nb ; i++){
-						cpt = cpt + i;
+					if (nb === "") {
+						$('#calcEntier .result p').html('Veuillez choisir un chiffre d\'abord');
+					} else {
+						var cpt = 0;
+						
+						for(var i = 0 ; i <= nb ; i++){
+							cpt = cpt + i;
+						}
+						
+						$('#calcEntier .result p').html(cpt);
 					}
-					
-					$('#calcEntier .result p').html(cpt);
 				}
 				
 				$('#calcEntier .bouton').click(function(){
-					var nb = $('#calcEntier .number').val();
-					calcNPremierEntier(nb);
+					var nombre = $('#calcEntier .number').val();
+					calcNPremierEntier(nombre);
+				});
+				
+				/* Calculer age */
+				function calcAge(day,month,year){
+					if (day === "" || month === "" || year === "") {
+						$('#calcAge .result p').html('Veuillez bien selectionner le jour, le mois et l\'année d\'abord');
+					} else {
+						var currentDate = new Date();
+						var currentDay = currentDate.getDate();
+						var currentMonth = currentDate.getMonth()+1; //January is 0!
+						var currentYear = currentDate.getFullYear();
+						
+						var age = currentYear - year;
+						
+						if(currentDay >= 10){
+							currentDay = currentDay;
+						}
+						else {
+							currentDay = "0"+currentDay;
+						}
+						
+						if(currentMonth >= 10){
+							currentMonth = currentMonth;
+						}
+						else {
+							currentMonth = "0"+currentMonth;
+						}
+						
+						if((currentDay >= day && currentMonth >= month) || currentMonth > month){
+							age = age;
+						}
+						else {
+							age--;
+						}
+						
+						$('#calcAge .result p').html(age + ' ans');
+					}
+				}
+				
+				$('#calcAge .bouton').click(function(){
+					var jour = $('#calcAge #jour').val();
+					var mois = $('#calcAge #mois').val();
+					var annee = $('#calcAge #annee').val();
+					calcAge(jour,mois,annee);
+				});
+				
+				/* Palindrome */
+				function verifierPalindrome(entree){
+					if (entree === "") {
+						$('#palindrome .result p').html('Veuillez saisir un mot d\'abord');
+					} else {
+						var entree_1 = [...entree].reverse().join('');
+						
+						if (entree === entree_1) {
+							$('#palindrome .result p').html(entree + ' est un palindrome');
+						} else {
+							$('#palindrome .result p').html(entree + ' n\'est pas un palindrome');
+						}
+					}
+				}
+				
+				$('#palindrome .bouton').click(function(){
+					var entree = $('#palindrome .mot').val().toLowerCase();
+					verifierPalindrome(entree);
 				});
 			});
 		</script>
@@ -108,7 +177,7 @@
 		
 		<div class="wrapper">
 			<div id="calcEntier">
-				<h2>Nombre entier</h2>	
+				<h2>Somme des N premiers entiers</h2>	
 				<p>Choisisser un nombre entier</p>	
 				<input class="number" type="number" min="0">
 				<br/>
@@ -119,8 +188,82 @@
 			
 			<hr>
 			
+			<div id="calcAge">
+				<h2>Calculer votre âge</h2>	
+				<p>Selectionner votre date de naissance</p>	
+				<select name="jour" id="jour">
+					<option value="">--Choisir le jour--</option>
+					<option value="01">1</option>
+					<option value="02">2</option>
+					<option value="03">3</option>
+					<option value="04">4</option>
+					<option value="05">5</option>
+					<option value="06">6</option>
+					<option value="07">7</option>
+					<option value="08">8</option>
+					<option value="09">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+					<option value="31">31</option>
+				</select>
+				
+				<select name="mois" id="mois">
+					<option value="">--Choisir le mois--</option>
+					<option value="01">Janvier</option>
+					<option value="02">Février</option>
+					<option value="03">Mars</option>
+					<option value="04">Avril</option>
+					<option value="05">Mai</option>
+					<option value="06">Juin</option>
+					<option value="07">Juillet</option>
+					<option value="08">Aout</option>
+					<option value="09">Septembre</option>
+					<option value="10">Octobre</option>
+					<option value="11">Novembre</option>
+					<option value="12">Décembre</option>
+				</select>
+				
+				<select name="annee" id="annee">
+					<option value="">--Choisir l'année--</option>
+					<option value="1990">1990</option>
+					<option value="1993">1993</option>
+					<option value="1994">1994</option>
+					<option value="1995">1995</option>
+					<option value="1996">1996</option>
+					<option value="1997">1997</option>
+					<option value="1998">1998</option>
+					<option value="1999">1999</option>
+					<option value="2000">2000</option>
+				</select>
+				
+				<input class="bouton" type="submit">
+				<h3>Résultat</h3>
+				<div class="inner-wrap result"><p>&nbsp;</p></div>
+			</div>
+			
+			<hr>
+			
 			<div id="palindrome">
-				<h2>Palindrome (pas encore fait)</h2>	
+				<h2>Vérificateur de palindrome</h2>	
 				<p>Entrer un mot</p>	
 				<input class="mot" type="text">
 				<br/>
