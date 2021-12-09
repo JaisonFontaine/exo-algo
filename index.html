@@ -190,8 +190,57 @@
 				}
 				
 				$('#palindrome .bouton').click(function(){
-					var entree = $('#palindrome .mot').val().toLowerCase();
+					var entree = $('#palindrome input.mot').val().toLowerCase();
 					verifierPalindrome(entree);
+				});
+				
+				/* IMC */
+				function calcIMC(taille,poids){
+					if (taille === "" || poids === "") {
+						$('#imc .result p').html('Veuillez entrer votre taille et votre poids d\'abord');
+					} else {
+						var nombre1 = (taille*0.01)          //convertion de la taille des centimètres en mètres
+						var nombre2 = (nombre1*nombre1)      //taille au carré
+						var nombre3 = (poids/nombre2)        //poids divisé par la taille
+					
+						$('#imc .result p.indice').html('Votre IMC est de : ' + nombre3);
+					
+						// Message en fonction de l'imc
+						if (nombre3 <= 16) {
+							$('#imc .result p.msg').html("Votre indice est un très faible, c'est à dire que vous êtes très maigre. Il faut faire très attention, je vous recomande de voir un nutrioniste!");
+						}
+						if (nombre3 <=18 && nombre3 >16) {
+							$('#imc .result p.msg').html("Votre indice est faible, vous êtes maigre, il faut surveiller votre ligne!");
+						}
+						if (nombre3 <=20 && nombre3 >18) {
+							$('#imc .result p.msg').html("Vous êtes en leger + sous-poids + , il faut manger!!!");
+						}
+						if (nombre3 <=24 && nombre3 >20) {
+							$('#imc .result p.msg').html("Vous êtes dans la moyenne, ne vous inquietez pas!");
+						}
+						if (nombre3 <=26 && nombre3 >24) {
+							$('#imc .result p.msg').html("Vous êtes en très leger sur-poids, ce n'est pas bien grave");
+						}
+						if (nombre3 <=28 && nombre3 >26) {
+							$('#imc .result p.msg').html("Vous êtes en sur-poids mais ce n'est pas iratrappable!");
+						}
+						if (nombre3 <=32 && nombre3 >28) {
+							$('#imc .result p.msg').html("Vous êtes en sur-poids!");
+						}
+						if (nombre3 >32) {
+							$('#imc .result p.msg').html("Vous êtes vraiment en sur-poids, je vous conseil de voir un nutritioniste pour qu'il vous adapte un regime personnalisé.");
+						}
+						
+						//Calcul du poid parfait
+						var nombre4 = (22*nombre2)         //22 est l'indice parfait
+						$('#imc .result p.poids-parfait').html("Votre poids idéal est de: " + nombre4 + "!");
+					}
+				}
+				
+				$('#imc .bouton').click(function(){
+					var t = $('#imc .taille').val();
+					var p = $('#imc .poids').val();
+					calcIMC(t,p);
 				});
 			});
 		</script>
@@ -257,6 +306,25 @@
 				<input class="bouton" type="submit">
 				<h3>Résultat</h3>
 				<div class="inner-wrap result"><p>&nbsp;</p></div>
+			</div>
+			
+			<hr>
+			
+			<div id="imc">
+				<h2>Calculer votre IMC</h2>	
+				<p>Entrer votre taille (en cm)</p>	
+				<input class="taille" type="text">
+				<br/>
+				<p>Entrer votre poids</p>	
+				<input class="poids" type="text">
+				<br/>
+				<input class="bouton" type="submit">
+				<h3>Résultat</h3>
+				<div class="inner-wrap result">
+					<p class="indice">&nbsp;</p>
+					<p class="msg">&nbsp;</p>
+					<p class="poids-parfait">&nbsp;</p>
+				</div>
 			</div>
 		</div>
 	</body>
